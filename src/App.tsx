@@ -35,11 +35,12 @@ import {
   CategoryShow,
 } from "./pages/categories";
 import { supabaseClient } from "./utility";
+import { Title } from "./components/title";
 
 function App() {
   return (
     <BrowserRouter>
-      <GitHubBanner />
+      {/* <GitHubBanner /> */}
       <RefineKbarProvider>
         <ColorModeContextProvider>
           <CssBaseline />
@@ -82,7 +83,10 @@ function App() {
                 <Route
                   element={
                     <Authenticated fallback={<CatchAllNavigate to="/login" />}>
-                      <ThemedLayoutV2 Header={() => <Header sticky />}>
+                      <ThemedLayoutV2 
+                        Header={() => <Header sticky />}
+                        Title={Title}
+                      >
                         <Outlet />
                       </ThemedLayoutV2>
                     </Authenticated>
@@ -117,6 +121,7 @@ function App() {
                     path="/login"
                     element={
                       <AuthPage
+                        title="Welcome to Chowbase"
                         type="login"
                         formProps={{
                           defaultValues: {
@@ -124,16 +129,47 @@ function App() {
                             password: "refine-supabase",
                           },
                         }}
+                        wrapperProps={{
+                          style: {
+                            backgroundImage: `url(https://res.cloudinary.com/khariokitony/image/upload/v1688877556/chowbase-bg.jpg)`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                          }
+                        }}
                       />
                     }
                   />
                   <Route
                     path="/register"
-                    element={<AuthPage type="register" />}
+                    element={
+                      <AuthPage
+                        title="Welcome to Chowbase"
+                        type="register"
+                        wrapperProps={{
+                          style: {
+                            backgroundImage: `url(https://res.cloudinary.com/khariokitony/image/upload/v1688877556/chowbase-bg.jpg)`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                          }
+                        }}
+                      />
+                    }
                   />
                   <Route
                     path="/forgot-password"
-                    element={<AuthPage type="forgotPassword" />}
+                    element={
+                      <AuthPage
+                        type="forgotPassword"
+                        title="Forgot Password"
+                        wrapperProps={{
+                          style: {
+                            backgroundImage: `url(https://res.cloudinary.com/khariokitony/image/upload/v1688877556/chowbase-bg.jpg)`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                          }
+                        }}
+                      />
+                    }
                   />
                 </Route>
               </Routes>
