@@ -19,6 +19,10 @@ import routerBindings, {
 } from "@refinedev/react-router-v6";
 import { dataProvider, liveProvider } from "@refinedev/supabase";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import StoreMallDirectoryIcon from '@mui/icons-material/StoreMallDirectory';
+import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
+
 import authProvider from "./authProvider";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
@@ -36,6 +40,9 @@ import {
 } from "./pages/categories";
 import { supabaseClient } from "./utility";
 import { Title } from "./components/title";
+import { Inventory, Item } from "./pages/inventory";
+import { Sales, Sale } from "./pages/sales";
+import { SuppliersList, Supplier } from "./pages/suppliers";
 
 function App() {
   return (
@@ -53,6 +60,33 @@ function App() {
               routerProvider={routerBindings}
               notificationProvider={notificationProvider}
               resources={[
+                {
+                  name: "inventory",
+                  list: "/inventory",
+                  show: "/inventory/item/:id",
+                  meta: {
+                      label: "Inventory",
+                      icon: <StoreMallDirectoryIcon />,
+                  },
+                },
+                {
+                  name: "sales",
+                  list: "/sales",
+                  show: "/sales/sale/:id",
+                  meta: {
+                      label: "Shop sales",
+                      icon: <ReceiptOutlinedIcon />,
+                  },
+                },
+                {
+                  name: "suppliers",
+                  list: "/suppliers",
+                  show: "/suppliers/supplier/:id",
+                  meta: {
+                      label: "Suppliers",
+                      icon: <LocalShippingOutlinedIcon />,
+                  },
+                },
                 {
                   name: "blog_posts",
                   list: "/blog-posts",
@@ -96,6 +130,19 @@ function App() {
                     index
                     element={<NavigateToResource resource="blog_posts" />}
                   />
+                  <Route path="/inventory">
+                    <Route index element={<Inventory />} />
+                    <Route path="item/:id" element={<Item />} />
+                  </Route>
+                  <Route path="/sales">
+                    <Route index element={<Sales />} />
+                    <Route path="sale/:id" element={<Sale />} />
+                  </Route>
+                  <Route path="/suppliers">
+                    <Route index element={<SuppliersList />} />
+                    <Route path="supplier/:id" element={<Supplier />} />
+                  </Route>
+
                   <Route path="/blog-posts">
                     <Route index element={<BlogPostList />} />
                     <Route path="create" element={<BlogPostCreate />} />
@@ -134,6 +181,7 @@ function App() {
                             backgroundImage: `url(https://res.cloudinary.com/khariokitony/image/upload/v1688877556/chowbase-bg.jpg)`,
                             backgroundSize: "cover",
                             backgroundPosition: "center",
+                            color: "white",
                           }
                         }}
                       />
@@ -150,6 +198,7 @@ function App() {
                             backgroundImage: `url(https://res.cloudinary.com/khariokitony/image/upload/v1688877556/chowbase-bg.jpg)`,
                             backgroundSize: "cover",
                             backgroundPosition: "center",
+                            color: "white",
                           }
                         }}
                       />
@@ -166,6 +215,7 @@ function App() {
                             backgroundImage: `url(https://res.cloudinary.com/khariokitony/image/upload/v1688877556/chowbase-bg.jpg)`,
                             backgroundSize: "cover",
                             backgroundPosition: "center",
+                            color: "white",
                           }
                         }}
                       />
