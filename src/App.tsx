@@ -61,7 +61,7 @@ function App() {
               notificationProvider={notificationProvider}
               resources={[
                 {
-                  name: "inventory",
+                  name: "items",
                   list: "/inventory",
                   show: "/inventory/item/:id",
                   meta: {
@@ -70,7 +70,7 @@ function App() {
                   },
                 },
                 {
-                  name: "sales",
+                  name: "products",
                   list: "/sales",
                   show: "/sales/sale/:id",
                   meta: {
